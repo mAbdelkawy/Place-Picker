@@ -1,11 +1,17 @@
 <app-places-container title="Your Favorite Places">
   @if (isFetching() && !errorMessage()){
   <p class="fallback-text">Fetching Favourite Places...</p>
-  } @if (errorMessage()) {
+  }
+  
+  
+  @if (errorMessage()) {
   <p class="fallback-text">{{ errorMessage() }}</p>
-  } @if (places()) {
-  <app-places [places]="places()!" />
-  } @else if (places()?.length === 0) {
+  }
+  
+  
+  @if (places()) {
+  <app-places [places]="places()!" (selectPlace)="onRemovePlace($event)" />
+  } @else if (places().length === 0) {
   <p class="fallback-text">Unfortunately, no places could be found.</p>
   }
 </app-places-container>

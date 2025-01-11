@@ -17,7 +17,7 @@ export class UserPlacesComponent implements OnInit {
   errorMessage = signal('');
   private placesService = inject(PlacesService);
   private destroyRef = inject(DestroyRef);
-  places = this.placesService.loadedUserPlaces
+  places = this.placesService.loadedUserPlaces;
 
   ngOnInit(): void {
     this.isFetching.set(true);
@@ -32,5 +32,9 @@ export class UserPlacesComponent implements OnInit {
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
     });
+  }
+
+  onRemovePlace(place: Place) {
+    this.placesService.removeUserPlace(place).subscribe();
   }
 }
